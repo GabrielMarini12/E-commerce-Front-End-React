@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext, getAmountOfItemsInCart } from "../contexts/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -6,14 +6,15 @@ import { Link } from "react-router-dom";
 
 const UserButtons = () => {
   const [amountOfItems, setAmountOfItems] = useState(0);
-  const CartInfo = useContext(CartContext);
+  const { setIsCartOpen, cartItems } = useContext(CartContext);
+
+  useEffect(() => {
+    setAmountOfItems(getAmountOfItemsInCart(cartItems));
+  }, [cartItems]);
 
   return (
     <div>
-      <button
-        className="px-2 relative"
-        onClick={() => CartInfo.setIsCartOpen(true)}
-      >
+      <button className="px-2 relative" onClick={() => setIsCartOpen(true)}>
         <FontAwesomeIcon icon={faBagShopping} />
         {!!amountOfItems && (
           <div

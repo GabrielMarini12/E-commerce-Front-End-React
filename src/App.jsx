@@ -10,9 +10,16 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState({});
 
+  const addToCart = (productId) => {
+    setCartItems({
+      ...cartItems,
+      [productId]: (cartItems[productId] ?? 0) + 1,
+    });
+  };
+
   return (
     <CartContext.Provider
-      value={{ isCartOpen, setIsCartOpen, cartItems, setCartItems }}
+      value={{ isCartOpen, setIsCartOpen, cartItems, addToCart }}
     >
       <Header />
       <Routes>
