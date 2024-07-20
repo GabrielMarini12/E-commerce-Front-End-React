@@ -10,7 +10,10 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState({});
 
+  const toggleCartOpen = () => setIsCartOpen(!isCartOpen);
+
   const addToCart = (productId) => {
+    console.log("estado atualizou");
     setCartItems({
       ...cartItems,
       [productId]: (cartItems[productId] ?? 0) + 1,
@@ -19,13 +22,13 @@ function App() {
 
   return (
     <CartContext.Provider
-      value={{ isCartOpen, setIsCartOpen, cartItems, addToCart }}
+      value={{ isCartOpen, toggleCartOpen, cartItems, addToCart }}
     >
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/history" element={<PurchaseHistory />} />
+        <Route path="/history" elemtn={<PurchaseHistory />} />
       </Routes>
     </CartContext.Provider>
   );
