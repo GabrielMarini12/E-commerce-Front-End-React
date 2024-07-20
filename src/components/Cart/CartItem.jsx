@@ -5,7 +5,7 @@ import { faXmark, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { catalogIndexedById } from "../../utils/catalog";
 
 const CartItem = ({ id, amount }) => {
-  const { addToCart, decreaseUnit } = useContext(CartContext);
+  const { addToCart, decreaseUnit, removeFromCart } = useContext(CartContext);
   const { price, name, image } = catalogIndexedById[id];
   return (
     <article className="flex bg-stone-100 p-1 border rounded-mg relative">
@@ -14,7 +14,10 @@ const CartItem = ({ id, amount }) => {
         alt={`Imagem do produto ${id}, ${name}.`}
         className="h-24"
       />
-      <button className="text-right text-l fixed absolute top-0 right-2 text-slate-950">
+      <button
+        onClick={() => removeFromCart(id)}
+        className="text-right text-l fixed absolute top-0 right-2 text-slate-950"
+      >
         <FontAwesomeIcon icon={faXmark} />
       </button>
       <div className="flex flex-col justify-around mx-2">
